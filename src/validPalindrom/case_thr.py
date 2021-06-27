@@ -4,9 +4,8 @@ import unittest
 
 def is_palindrom(wording: str):
     wording = wording.lower()
-
     wording = re.sub('[^a-z0-9]', '', wording)
-
+    print("wording", wording)
     return wording == wording[::-1]
 
 
