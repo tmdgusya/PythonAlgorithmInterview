@@ -23,6 +23,35 @@ def insertion_sort(arr: list):
                 break
     return arr
 
+def quick_sort(arr: list, start, end):
+
+    if start >= end:
+        return
+
+    pivot = start
+    left = start + 1
+    right = end
+
+    while left <= right:
+
+        # left 가 pivot 보다 큰값 찾기
+        while left <= end and arr[left] <= arr[pivot]:
+            left += 1
+        
+        while right > start and arr[right] >= arr[pivot]:
+            right -= 1
+
+        if left > right:
+            arr[right], arr[pivot] = arr[pivot], arr[right]
+        else:
+            arr[left], arr[right] = arr[right], arr[left]
+
+    quick_sort(arr, start, right - 1)
+    quick_sort(arr, right + 1, end) 
+
+    return arr
+    
+
 class TestClass(unittest.TestCase):
 
     def test_one(self):
@@ -32,3 +61,7 @@ class TestClass(unittest.TestCase):
     def test_insertion_sort(self):
         arr = [1,5,3,8,4,9]
         self.assertEqual(insertion_sort(arr), [1,3,4,5,8,9])
+
+    def test_quick_sort(self):
+        arr = [1,5,3,8,4,9]
+        self.assertEqual(quick_sort(arr=arr, start=0, end=len(arr) - 1), [1,3,4,5,8,9])
