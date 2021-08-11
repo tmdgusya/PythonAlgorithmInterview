@@ -16,7 +16,7 @@ def binary_search(target, arr: list, start, end):
 
     if arr[mid] == target:
         return mid
-    elif arr[mid] > target:
+    elif target < arr[mid]:
         return binary_search(target, arr, start, mid - 1)
     else:
         return binary_search(target, arr, mid+1, end)
