@@ -1,5 +1,5 @@
 import unittest
-from collections import deque
+import heapq
 
 def mix(food1, food2):
     return food1 + (food2 * 2)
@@ -12,15 +12,15 @@ def solution(scoville: list, K: int):
     # TODO: 배열에서 두개를 dequeue 를 이용해서 앞에서 pop 하고, 스코빌 지수 공식을 더해서 넣는다.
     # TODO: 소팅한다.
     answer = 0
-    scoville.sort()
+    heapq.heapify(scoville)
     while scoville[0] < K:
         if len(scoville) <= 1 :
             return -1
-        first_food = scoville.pop(0)
-        second_food = scoville.pop(0)
+        print(scoville)
+        first_food = heapq.heappop(scoville)
+        second_food = heapq.heappop(scoville)
 
-        scoville.insert(0, mix(first_food, second_food))
-        scoville.sort()
+        heapq.heappush(scoville, mix(first_food, second_food))
         answer += 1
 
     return answer
